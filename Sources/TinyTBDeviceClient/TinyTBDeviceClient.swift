@@ -15,7 +15,7 @@ import Logging
 
 /// Tiny MQTT Client for ThingsBoard client devices, based on MQTTNIO
 /// TLS enabled by default
-class TinyTBDeviceClient {
+public class TinyTBDeviceClient {
     // MARK: - Properties
     private let eventLoopGroup: NIOEventLoopGroupProvider
     private let client: MQTTClient
@@ -34,7 +34,7 @@ class TinyTBDeviceClient {
     ///   - password: Password for authentication with the broker.
     ///   - eventLoopGroupProvider: The event loop group provider to use for networking operations
     ///   - logger: Optional logger to use for logging messages.
-    init(
+    public init(
         host: String,
         port: Int,
         clientId: String,
@@ -103,7 +103,7 @@ class TinyTBDeviceClient {
     ///   - onSuccess: Closure called when connection is successful (optional).
     ///   - onError: Closure called when connection fails with an error (optional).
     /// - Note: The client must be connected before attempting to publish or subscribe.
-    func connect(
+    public func connect(
         cleanSession: Bool = true,
         onSuccess: (() -> Void)? = nil,
         onError: ((Error) -> Void)? = nil
@@ -125,7 +125,7 @@ class TinyTBDeviceClient {
     /// - Parameters:
     ///   - onSuccess: Closure called when disconnection is successful (optional).
     ///   - onError: Closure called when disconnection fails with an error (optional).
-    func disconnect(
+    public func disconnect(
         onSuccess: (() -> Void)? = nil,
         onError: ((Error) -> Void)? = nil
     ) {
@@ -147,7 +147,7 @@ class TinyTBDeviceClient {
     ///   - topics: Array of topic names to subscribe to.
     ///   - onSuccess: Closure called with the subscribed topics and subscription acknowledgment when successful (optional).
     ///   - onError: Closure called when subscription fails with an error (optional).
-    func subscribe(
+    public func subscribe(
         to topics: [String],
         onSuccess: (([String], MQTTSuback) -> Void)? = nil,
         onError: ((Error) -> Void)? = nil
@@ -172,7 +172,7 @@ class TinyTBDeviceClient {
     ///   - topic: The MQTT topic to publish the message to.
     ///   - onSuccess: Closure called when publishing is successful (optional).
     ///   - onError: Closure called when publishing fails with an error (optional).
-    func publish(
+    public func publish(
         message: String,
         to topic: String,
         onSuccess: (() -> Void)? = nil,
@@ -200,7 +200,7 @@ class TinyTBDeviceClient {
     ///   - name: A unique name for this listener (used internally).
     ///   - onMessage: Closure called with the received message and topic when a message is received (optional).
     ///   - onError: Closure called when an error occurs during message processing (optional).
-    func registerMessageListener(
+    public func registerMessageListener(
         named name: String,
         onMessage: ((String, String) -> Void)? = nil,
         onError: ((Error) -> Void)? = nil
@@ -224,7 +224,7 @@ class TinyTBDeviceClient {
     ///   - responseMessage: The message to publish as a response.
     ///   - onSuccess: Closure called when the response is published successfully (optional).
     ///   - onError: Closure called when publishing fails with an error (optional).
-    func respondToRPCRequest(
+    public func respondToRPCRequest(
         rpcRequestTopic: String,
         responseMessage: String,
         onSuccess: (() -> Void)? = nil,
