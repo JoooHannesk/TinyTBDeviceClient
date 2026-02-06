@@ -25,7 +25,7 @@ let package = Package(
         .target(
             name: "YourProject",
             dependencies: [
-                .product(name: "TinyThingsBoardMQTT", package: "TinyThingsBoardMQTT"),
+                .product(name: "TinyTBDeviceClient", package: "TinyTBDeviceClient"),
             ]
         ),
     ]
