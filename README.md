@@ -10,6 +10,9 @@ A minimal, pragmatic MQTT client built on NIO MQTT, pre-configured for ThingsBoa
 - TLS enabled by default, with required CA pinning
 - Runs on macOS, iOS, Linux (successfully tested on Raspberry Pi), and anywhere MQTT-NIO is supported
 
+## Sample Implementation
+A sample implementation making use of this library can be founde here: [TinyTBDeviceClient-Example](https://github.com/JoooHannesk/TinyTBDeviceClient-Example)
+
 ## Installation
 Add the package dependency to your Package.swift file:
 ```swift
