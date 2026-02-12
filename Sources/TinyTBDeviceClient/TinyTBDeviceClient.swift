@@ -165,6 +165,10 @@ public class TinyTBDeviceClient {
         }
     }
 
+    public func unsubscribe() {
+        // TODO: implement
+    }
+
     /// Publishes a message to the specified MQTT topic.
     ///
     /// - Parameters:
@@ -215,6 +219,11 @@ public class TinyTBDeviceClient {
                 onError?(error)
             }
         }
+    }
+
+
+    public func unregisterMessageListener() {
+        // TODO: implement
     }
 
     /// Responds to an RPC request by publishing a response message to the corresponding response topic.
