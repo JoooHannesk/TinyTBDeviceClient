@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "03AB313D-8BFB-44F0-86D0-A33D271D414D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "TinyTBDeviceClientTests",
+        "name" : "TinyTBDeviceClientTests"
+      }
+    }
+  ],
+  "version" : 1
+}
