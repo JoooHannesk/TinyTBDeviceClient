@@ -75,6 +75,10 @@ public class TinyTBDeviceClient {
         )
     }
 
+    deinit {
+        try? self.client.syncShutdownGracefully()
+    }
+
     // MARK: - Private Methods
 
     /// Creates a TLS configuration using the certificate at the specified path.
