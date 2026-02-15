@@ -41,6 +41,17 @@ class ConnectivityIntegrationCUT {
         try #require(self.tinyClient != nil)
     }
 
+
+    func listen() async throws -> Bool {
+        var registerListenerSuccess = true
+        self.tinyClient?.registerMessageListener(named: "Message-Listener", onError:  { error in
+            registerListenerSuccess = false
+        })
+        try await Task.sleep(for: testTimeout)
+        try #require(registerListenerSuccess)
+        return registerListenerSuccess
+    }
+
     func connect() async throws -> Bool? {
         var connectionSuccess: Bool? = nil
         self.tinyClient?.connect(
@@ -107,10 +118,20 @@ class ConnectivityIntegrationCUT {
 @Test("Client-Connects")
 func canConnect() async throws {
     let clientOUT = try ConnectivityIntegrationCUT()
+    let listenerRegistered = try await clientOUT.listen()
     let conSuccess = try await clientOUT.connect()
     let disconSuccess = try await clientOUT.disconnect()
+    #expect(listenerRegistered, "Listener should have been registered")
     #expect(conSuccess!, "Should connect successfully")
     #expect(disconSuccess!, "Should disconnect successfully")
+}
+
+@Test("Client-Cannot-Connect")
+func cannotConnect() async throws {
+    let nonWorkingCredentials = MQTTClientCredentials(host: "test.mosquitto.org", port: 8883, caCertPath: "/etc/ssl/cert.pem", clientId: "NoID", username: "NoUsr", password: "NoPassword")
+    let clientOUT = try ConnectivityIntegrationCUT(clientCredentials: nonWorkingCredentials)
+    let conSuccess = try await clientOUT.connect()
+    #expect(!conSuccess!, "Should not connect successfully")
 }
 
 @Test("Client-Subscribes")
@@ -136,4 +157,11 @@ func canPublish() async throws {
     let pubSuccess = try await clientOUT.publish()
     let _ = try await clientOUT.disconnect()
     #expect(pubSuccess!, "Should publish successfully")
+}
+
+@Test("Client-Cannot-Publish")
+func cannotPublish() async throws {
+    let clientOUT = try ConnectivityIntegrationCUT()
+    let pubSuccess = try await clientOUT.publish()
+    #expect(!pubSuccess!, "Should not publish successfully")
 }
