@@ -1,4 +1,4 @@
-# TinyTBDeviceClient
+# ``TinyTBDeviceClient``
 Tiny MQTT Client for ThingsBoard devices — written in Swift
 
 A minimal, pragmatic MQTT client built on top of NIO MQTT, pre-configured for ThingsBoard device connectivity. Secure by default through mandatory TLS and CA pinning.
@@ -19,36 +19,16 @@ This library provides a simplified interface for connecting IoT devices to Thing
 - Additional information on my blog: [TinyTBDeviceClient](https://johanneskinzig.com/tinytbdeviceclient.html)
 
 ## 💻 Features
-- Connect
-- Disconect
-- Push Telemetry
-- Subscribe to topics
-- Listen and respond to RPCs (e.g. initiated through buttons and switches on a Dashboard)
+- Connect: ``TinyTBDeviceClient/TinyTBDeviceClient/connect(cleanSession:onSuccess:onError:)``
+- Disconect: ``TinyTBDeviceClient/TinyTBDeviceClient/disconnect(onSuccess:onError:)``
+- Push Telemetry: ``TinyTBDeviceClient/TinyTBDeviceClient/publish(message:to:onSuccess:onError:)``
+- Subscribe to topics: ``TinyTBDeviceClient/TinyTBDeviceClient/subscribe(to:onSuccess:onError:)``
+- Listen and respond to RPCs (e.g. initiated through buttons and switches on a Dashboard):
+    - Listen to message: ``TinyTBDeviceClient/TinyTBDeviceClient/registerMessageListener(named:onMessage:onError:)``
+    - Respond to RPC: ``TinyTBDeviceClient/TinyTBDeviceClient/respondToRPCRequest(rpcRequestTopic:responseMessage:onSuccess:onError:)``
 
 ## 🔐 SSL / TLS
 In case you need to set up your own PKI for your MQTT or ThingsBoard server, look at the related post on my blog: [Building a Secure PKI for MQTT using OpenSSL](https://johanneskinzig.com/building-a-secure-pki-for-mqtt-using-openssl-root-ca-intermediate-ca-and-server-certificates.html)
-
-## 💾 Installation
-Add the package dependency to your `Package.swift` file:
-```swift
-// swift-tools-version:5.10
-import PackageDescription
-
-let package = Package(
-    name: "YourProject",
-    dependencies: [
-        .package(url: "https://github.com/JoooHannesk/TinyTBDeviceClient.git", from: "0.0.1"),
-    ],
-    targets: [
-        .target(
-            name: "YourProject",
-            dependencies: [
-                .product(name: "TinyTBDeviceClient", package: "TinyTBDeviceClient"),
-            ]
-        ),
-    ]
-)
-```
 
 ## 📑 License
 Apache 2.0 License
