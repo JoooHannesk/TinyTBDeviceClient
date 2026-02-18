@@ -14,12 +14,19 @@ import Logging
 
 
 /// Tiny MQTT Client for ThingsBoard client devices, based on MQTTNIO
-/// TLS enabled by default
+/// 
+/// A minimal, pragmatic MQTT client built on top of NIO MQTT, pre-configured for
+/// ThingsBoard device connectivity. Secure by default through mandatory TLS and CA pinning.
 public class TinyTBDeviceClient {
     // MARK: - Properties
     private let eventLoopGroup: NIOEventLoopGroupProvider
     private let client: MQTTClient
     private let logger: Logger?
+
+    /// Returns connection status: true if connected to broker, false otherwise.
+    public var isConnected: Bool {
+        self.client.isActive()
+    }
 
     // MARK: - Initializer
 

@@ -18,7 +18,6 @@ class ConnectivityIntegrationCUT {
     let logger = Logger(label: "TinyTBDeviceClient")
     static let clientCredentials: MQTTClientCredentials = ConfigLoader(searchPath: "Credentials").loadClientCredentialsFromFile(fileName: "credentials.json")!
 
-
     deinit {
         self.tinyClient = nil
     }
@@ -113,6 +112,11 @@ class ConnectivityIntegrationCUT {
             try #require(publishSuccess != nil)
             return publishSuccess
     }
+
+    func returnConnectionState() throws -> Bool {
+        try #require(self.tinyClient != nil)
+        return self.tinyClient!.isConnected
+    }
 }
 
 @Test("Client-Connects")
@@ -164,4 +168,13 @@ func cannotPublish() async throws {
     let clientOUT = try ConnectivityIntegrationCUT()
     let pubSuccess = try await clientOUT.publish()
     #expect(!pubSuccess!, "Should not publish successfully")
+}
+
+@Test("Connection-Status")
+func checkConnectionStatus() async throws {
+    let clientOUT = try ConnectivityIntegrationCUT()
+    let _ = try await clientOUT.connect()
+    #expect(try clientOUT.returnConnectionState())
+    let _ = try await clientOUT.disconnect()
+    #expect(try !clientOUT.returnConnectionState())
 }
