@@ -51,6 +51,6 @@ let package = Package(
 ```
 
 ## 📑 License
-Apache 2.0 License
-Copyright (c) 2026 Johannes Kinzig
-see LICENSE
+- Apache 2.0 License
+- Copyright (c) 2026 Johannes Kinzig
+- see LICENSE
